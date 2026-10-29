@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block title %}Conments {% endblock %}
+{% block h1  %}
+    comment Page
+{% endblock %}
+{% block content %}
+    <h2 class="white_text" style=" font-size:xx-large;" >{{ post.title}}</h2>
+    <hr >
+    <br>
+    {% if post.image %}
+    <div class="div_image">
+        <img src="{{ url_for('static', filename='uploads/' + post.image) }}" alt="Post Image" class="edit_img" >
+    </div>
+    {% endif %}
+
+    <hr >
+    <br>
+    <p class="white_text" style=" font-size: x-large;">{{ post.content }} </p>
+    <br>
+    <hr>
+
+
+    <h3 class="white_text">Comments:</h3>
+    {% for comment in comments %}
+        <div class="comment" style="border: 1px solid #fefefe; padding: 10px; margin: 10px 0;">
+            <h4>{{ comment.author }}</h4>
+            <hr>
+            <p>{{ comment.text }}</p>
+            {% if is_admin %}
+                <form method="POST" class="btn_del_and_ed" action="{{ url_for('toggle_comment', post_id=post._id,comment_index=loop.index0) }}">
+                    <br>
+                    <button type="submit"style="  width: 70px;  background-color: rgb(13, 255, 0);"  >
+                        {{ 'Deactivate' if comment.is_active else 'Activate' }} 
+                    </button>
+                </form>
+                <form method="POST" class="btn_del_and_ed" action="{{ url_for('delete_comment', post_id=post._id,comment_index=loop.index0) }}">
+                    <button type="submit" style=" background-color: red;  width: 70px;"> Delete</button>
+                </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+
+    {% if not is_admin %}
+        <h3 class="white_text">Add a Comment</h3>
+        <form method="POST" class="global_form">
+            <label for="author">Author: </label>
+            <input type="text" id="author" name="author" class="new_post"  required>
+            <br>
+            <label for="text">Comment: </label>
+            <textarea  name="text"  class="new_post" required></textarea> <br>
+            <button type="submit" class="new_post" >Add Comment</button> 
+        </form>
+    {% endif %}
+{% endblock %}

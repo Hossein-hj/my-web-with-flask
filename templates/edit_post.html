@@ -1,0 +1,23 @@
+
+{% extends "layout.html"%}
+ {%block h1 %}Edit post{% endblock %}
+{% block title %}
+    Edit Post 
+{% endblock %}
+
+
+{% block content %}
+    
+    <form method="post" class="global_form">
+        <label >post id:{{post._id}}</label><br>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" class="new_post" value="{{ post.title }}" required>
+        <br>
+        <label for="cont">description:</label>
+        <textarea name="content"  class="new_post" required>{{ post.content }}</textarea>
+        <br>
+        <button type="submit" class="new_post" style="background-color: aquamarine;">Save  Changes</button>
+    </form>
+    
+    
+{% endblock %}

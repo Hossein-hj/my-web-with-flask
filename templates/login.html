@@ -1,0 +1,13 @@
+{% extends 'temp.html' %}
+{% block h1  %}
+    LOGIN Page
+{% endblock %}
+
+{% block main%}
+    <form  method="post" class="global_form">
+        <p>{{ errormsg }}</p>
+        <input type="text" name="username" id="username" class="new_post" placeholder="username..." required>
+        <input type="password" name="password" id="password" class="new_post" placeholder="password..." required>
+        <input type="submit" class="new_post" value="Login">
+    </form>
+{% endblock %}

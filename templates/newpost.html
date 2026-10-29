@@ -1,0 +1,14 @@
+{% extends 'temp.html' %}
+{% block h1  %}
+    new post
+{% endblock %}
+<!-- تنظیم هدر به عنوان crate a new post -->
+
+{% block main%}
+    <form  method="post" enctype="multipart/form-data"  class="global_form">
+        <input type="text" name="title" id="title" class="new_post" placeholder="  enter your title...." required >
+        <textarea name="description" id="description" class="new_post" placeholder="  description...." required></textarea >
+        <input type="file" name="img" id="img"  style="color: antiquewhite;" accept=".jpg , .jpeg , .png , .gif" >
+        <input type="submit" class="new_post" value="send post">
+    </form>
+{% endblock %}

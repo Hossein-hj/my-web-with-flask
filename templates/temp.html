@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Home page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/' + 'style.css') }}">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+</head>
+
+<body>
+
+    <header>
+        <h1>{% block h1 %}{% endblock %}</h1>
+
+        <nav>
+            <ul>
+                <li><a class="limo_text" href="/">Home Page</a></li>
+                {% if session.get('admin', None) %}
+                <li><a  class="white_text" href="/newpost">New Post</a></li>
+                <li><a   class="white_text" href="/logout">Log Out</a></li>
+                {% else %}
+                <li><a class="white_text" href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block main %} {% endblock %}
+    </main>
+    <footer>
+        <b>
+           created by Hossein Jamal
+        </b>
+    </footer>
+</body>
+</html>

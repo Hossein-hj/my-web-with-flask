@@ -1,0 +1,50 @@
+{% extends 'temp.html' %}
+
+{% block h1 %}
+WELCOME   {{ session['user'] }}
+{% endblock %}
+
+{% block main %}
+    {% for post in posts %}
+    <div class="post">
+        <div>
+            {% if post.get('image', 'nopic.png') != None %}
+            <img src="{{ url_for('static', filename='uploads/' + post.get('image', 'nopic.png')) }}">
+            {% endif %}
+        </div>
+
+        <div>
+            <div id="index_title">
+                <h2 class="white_text">
+                   {{ post.title }} 
+                    
+                </h2>
+            </div>
+            <div id="content_text"><p  class="white_text">{{ post.content }}</p></div>
+            <hr style="border-color: darkgray;">
+            <div class="div_btns" >
+                <form class="btn_del_and_ed" action="{{ url_for('view_comments', post_id=post._id) }}">
+                    <button id="comment">
+                        Comments
+                    </button>
+                </form>
+                {% if session.get('admin') %}
+                    <form class="btn_del_and_ed" action="{{ url_for('edit_post', post_id=post._id) }}">
+                        <button class="edit">Edit</button>
+                    </form>
+                    <form class="btn_del_and_ed" action="{{ url_for('delete_post', post_id=post._id) }}">
+                        <button class="delete">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
+            
+            
+            
+                
+           
+
+            
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
